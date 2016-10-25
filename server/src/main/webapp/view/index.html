@@ -1,0 +1,207 @@
+<html ng-app="sinkDaShip">
+<head>
+	<title>SinkDaShip 2.0 beta</title>
+	
+	<script src="lib/angular.js"></script>
+	<script src="lib/mask.js"></script>
+	<script src="lib/app.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/custom.css">
+
+</head>
+<body ng-controller="sinkController">
+	<div class="jumbotron">
+		<h3>Sink da Ship</h3>
+		<h4>Type your name and set up your board</h4>
+		<div class="row">
+			<div class="col-md-5">
+				<form id="newPlayerForm" onsubmit="return false;">
+					<input ng-required="true" ng-model="player.name" type="text" class="form-control" placeholder="Your name"></input>
+					<div class="col-sm-3">
+						<label>CARR</label>
+						<input type="text" ui-mask="HV" ui-mask-placeholder="A1" maxlength="2" ng-required="true" class="form-control" ng-model="player.board.ships[0].parts[0].position"></input>
+						<input type="text" ui-mask="HV" ui-mask-placeholder="A2" maxlength="2" ng-required="true" class="form-control" ng-model="player.board.ships[0].parts[1].position"></input>
+						<input type="text" ui-mask="HV" ui-mask-placeholder="A3" maxlength="2" ng-required="true" class="form-control" ng-model="player.board.ships[0].parts[2].position"></input>
+						<input type="text" ui-mask="HV" ui-mask-placeholder="A4" maxlength="2" ng-required="true" class="form-control" ng-model="player.board.ships[0].parts[3].position"></input>
+						<input type="text" ui-mask="HV" ui-mask-placeholder="A5" maxlength="2" ng-required="true" class="form-control" ng-model="player.board.ships[0].parts[4].position"></input>
+					</div>
+					<div class="col-sm-3">
+						<label>BSHP</label>
+						<input type="text" ui-mask="HV" ui-mask-placeholder="B1" maxlength="2" ng-required="true" class="form-control" ng-model="player.board.ships[1].parts[0].position"></input>
+						<input type="text" ui-mask="HV" ui-mask-placeholder="B2" maxlength="2" ng-required="true" class="form-control" ng-model="player.board.ships[1].parts[1].position"></input>
+						<input type="text" ui-mask="HV" ui-mask-placeholder="B3" maxlength="2" ng-required="true" class="form-control" ng-model="player.board.ships[1].parts[2].position"></input>
+						<input type="text" ui-mask="HV" ui-mask-placeholder="B4" maxlength="2" ng-required="true" class="form-control" ng-model="player.board.ships[1].parts[3].position"></input>
+					</div>
+					<div class="col-sm-3">
+						<label>CRUI</label>
+						<input type="text" ui-mask="HV" ui-mask-placeholder="C1" maxlength="2" ng-required="true" class="form-control" ng-model="player.board.ships[2].parts[0].position"></input>
+						<input type="text" ui-mask="HV" ui-mask-placeholder="C2" maxlength="2" ng-required="true" class="form-control" ng-model="player.board.ships[2].parts[1].position"></input>
+						<input type="text" ui-mask="HV" ui-mask-placeholder="C3" maxlength="2" ng-required="true" class="form-control" ng-model="player.board.ships[2].parts[2].position"></input>
+						<label>SUBM</label>
+						<input type="text" ui-mask="HV" ui-mask-placeholder="D1" maxlength="2" ng-required="true" class="form-control" ng-model="player.board.ships[3].parts[0].position"></input>
+						<input type="text" ui-mask="HV" ui-mask-placeholder="D2" maxlength="2" ng-required="true" class="form-control" ng-model="player.board.ships[3].parts[1].position"></input>
+						<input type="text" ui-mask="HV" ui-mask-placeholder="D3" maxlength="2" ng-required="true" class="form-control" ng-model="player.board.ships[3].parts[2].position"></input>
+					</div>
+					<div class="col-sm-3">
+						<label>DEST</label>
+						<input type="text" ui-mask="HV" ui-mask-placeholder="E1" maxlength="2" ng-required="true" class="form-control" ng-model="player.board.ships[4].parts[0].position"></input>
+						<input type="text" ui-mask="HV" ui-mask-placeholder="E2" maxlength="2" ng-required="true" class="form-control" ng-model="player.board.ships[4].parts[1].position"></input>
+					</div>
+					<input type="submit" ng-click="enterNewGame(player)" class="btn btn-block btn-success" value="Enter new game"></input>
+				</form>
+			</div>
+			<div class="col-md-7">
+				<table class="table table-bordered">	
+					<tr>
+						<th></th>
+						<th>1</th>
+						<th>2</th>
+						<th>3</th>
+						<th>4</th>
+						<th>5</th>
+						<th>6</th>
+						<th>7</th>
+						<th>8</th>
+						<th>9</th>
+						<th>10</th>
+					</tr>
+					<tbody>
+						<tr>
+							<th scope="row">A</th>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<th scope="row">B</th>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<th scope="row">C</th>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<th scope="row">D</th>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<th scope="row">E</th>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<th scope="row">F</th>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<th scope="row">G</th>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<th scope="row">H</th>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<th scope="row">I</th>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<th scope="row">J</th>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+						{{player}}
+</body>
+</html>
