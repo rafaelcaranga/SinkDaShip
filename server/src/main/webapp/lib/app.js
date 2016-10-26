@@ -1,4 +1,4 @@
-var app = angular.module('sinkDaShip',['ui.mask']);
+var app = angular.module('sinkDaShip',['ui.mask','ngRoute']);
 
 app.config(['uiMask.ConfigProvider', function(uiMaskConfigProvider) {
 	uiMaskConfigProvider.maskDefinitions({'H': /[a-j,A-J]/, 'V': /[0-9]/});
@@ -6,7 +6,21 @@ app.config(['uiMask.ConfigProvider', function(uiMaskConfigProvider) {
 	uiMaskConfigProvider.addDefaultPlaceholder(true);
 }]);
 
-app.controller('sinkController', function ($scope, $http) {
+app.config(function($routeProvider){
+	$routeProvider.when("/battle", {
+		templateUrl : "view/battle.html",
+		controller : "battleController"
+	});
+	$routeProvider.when("/game-over", {
+		templateUrl : "view/game-over.html"
+	});
+	$routeProvider.otherwise({
+		templateUrl : "view/new-player.html",
+		controller : "newPlayerController"
+	});
+});
+
+app.controller('newPlayerController', function ($scope, $http, $location) {
 
 	var dictLetters = {
 							"A":1,"B":2,"C":3,"D":4,"E":5,"F":6,"G":7,"H":8,"I":9,"J":10,
@@ -121,6 +135,7 @@ app.controller('sinkController', function ($scope, $http) {
 		console.log(data);
 		if (data.ok){
 			console.log('success entering in new match, take your ID: '+data.resultObject.matchIdentificator+' you are the player '+data.resultObject.playerNumber);
+			$location.path('/battle');
 		} else {
 			enterNewGameErrorCallback(data);
 		}
@@ -129,5 +144,10 @@ app.controller('sinkController', function ($scope, $http) {
 	var enterNewGameErrorCallback = function (data) {
 		console.log('error while entering new game',data);
 	};
+
+});
+
+
+app.controller('battleController', function ($scope, $http, $location) {
 
 });
